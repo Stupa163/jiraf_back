@@ -1,0 +1,6 @@
+node_modules/*
+README.md
+base/base.sql
+bin/www
+package.json
+package-lock.json

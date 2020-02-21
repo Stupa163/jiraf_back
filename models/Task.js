@@ -1,37 +1,39 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Task', {
+module.exports = (sequelize, DataTypes) => {
+  const Task = sequelize.define('Task', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
     title: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING(500),
-      allowNull: false
+      allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('en_cours','termine','a_faire'),
-      allowNull: false
+      type: DataTypes.ENUM('en_cours', 'termine', 'a_faire'),
+      allowNull: false,
     },
     completionTime: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
     },
     sprint: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
         model: 'Sprint',
-        key: 'id'
-      }
-    }
+        key: 'id',
+      },
+    },
   }, {
-    tableName: 'Task'
+    tableName: 'Task',
   });
+
+  return Task;
 };

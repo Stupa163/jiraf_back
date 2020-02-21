@@ -1,68 +1,68 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Project = sequelize.define('Project', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
     title: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
     },
     amount: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull: false,
     },
     delay: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
     },
     startDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
     },
     endDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('en_cours','realise'),
-      allowNull: false
+      type: DataTypes.ENUM('en_cours', 'realise'),
+      allowNull: false,
     },
     stacks: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     adr: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
     },
     client: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
         model: 'Client',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     user: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
         model: 'User',
-        key: 'id'
-      }
-    }
+        key: 'id',
+      },
+    },
   }, {
-    tableName: 'Project'
+    tableName: 'Project',
   });
 
   Project.associate = (models) => {
-    Project.hasOne(models.User, {foreignKey: 'id'});
-    Project.hasOne(models.Client, {foreignKey: 'id'});
-    Project.hasMany(models.Sprint, {foreignKey: 'project'});
+    Project.hasOne(models.User, { foreignKey: 'id' });
+    Project.hasOne(models.Client, { foreignKey: 'id' });
+    Project.hasMany(models.Sprint, { foreignKey: 'project' });
   };
 
   return Project;

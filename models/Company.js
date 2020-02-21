@@ -1,30 +1,30 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  const Company =  sequelize.define('Company', {
+module.exports = (sequelize, DataTypes) => {
+  const Company = sequelize.define('Company', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
     },
     siret: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('sas','sasu','autoentrepreneur','eurl','sarl'),
-      allowNull: false
-    }
+      type: DataTypes.ENUM('sas', 'sasu', 'autoentrepreneur', 'eurl', 'sarl'),
+      allowNull: false,
+    },
   }, {
-    tableName: 'Company'
+    tableName: 'Company',
   });
 
   Company.associate = (models) => {
-    Company.hasOne(models.User, {foreignKey: 'company'});
+    Company.hasOne(models.User, { foreignKey: 'company' });
   };
 
   return Company;
