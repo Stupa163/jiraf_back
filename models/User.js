@@ -45,6 +45,12 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  User.addScope('defaultScope', {
+    attributes: { exclude: ['password'] },
+  });
+
+  User.addScope('passwordIncluded', {});
+
   User.associate = (models) => {
     User.belongsTo(models.Company, { foreignKey: 'id' });
     User.hasMany(models.Project, { foreignKey: 'user' });
