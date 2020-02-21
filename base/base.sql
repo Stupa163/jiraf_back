@@ -18,6 +18,7 @@ CREATE TABLE `User`
  `id`        int NOT NULL ,
  `firstName` varchar(255) NOT NULL ,
  `lastName`  varchar(255) NOT NULL ,
+ `password`  varchar(255) NOT NULL ,
  `mail`      varchar(255) NOT NULL ,
  `phone`     bigint NOT NULL ,
  `profile`   enum('back', 'front', 'data_analyst', 'qa') NOT NULL ,
