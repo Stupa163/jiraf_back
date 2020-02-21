@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'Project',
+    timestamps: false,
   });
 
   Project.associate = (models) => {

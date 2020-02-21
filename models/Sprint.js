@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'Sprint',
+    timestamps: false,
   });
 
   Sprint.associate = (models) => {

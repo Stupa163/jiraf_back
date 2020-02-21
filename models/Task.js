@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'Task',
+    timestamps: false,
   });
 
   Task.associate = (models) => {
