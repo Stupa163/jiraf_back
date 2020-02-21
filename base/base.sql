@@ -10,6 +10,8 @@ CREATE TABLE `Company`
 PRIMARY KEY (`id`)
 );
 
+ALTER TABLE `Company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- ************************************** `User`
 
@@ -29,6 +31,8 @@ KEY `fkIdx_30` (`company`),
 CONSTRAINT `FK_30` FOREIGN KEY `fkIdx_30` (`company`) REFERENCES `Company` (`id`)
 );
 
+ALTER TABLE `User`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- ************************************** `Client`
 
@@ -45,6 +49,8 @@ CREATE TABLE `Client`
 PRIMARY KEY (`id`)
 );
 
+ALTER TABLE `Client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- ************************************** `Project`
 
@@ -69,6 +75,8 @@ KEY `fkIdx_61` (`user`),
 CONSTRAINT `FK_61` FOREIGN KEY `fkIdx_61` (`user`) REFERENCES `User` (`id`)
 );
 
+ALTER TABLE `Project`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- ************************************** `Sprint`
 
@@ -86,6 +94,8 @@ KEY `fkIdx_71` (`project`),
 CONSTRAINT `FK_71` FOREIGN KEY `fkIdx_71` (`project`) REFERENCES `Project` (`id`)
 );
 
+ALTER TABLE `Sprint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- ************************************** `Task`
 
@@ -102,3 +112,6 @@ PRIMARY KEY (`id`),
 KEY `fkIdx_81` (`sprint`),
 CONSTRAINT `FK_81` FOREIGN KEY `fkIdx_81` (`sprint`) REFERENCES `Sprint` (`id`)
 );
+
+ALTER TABLE `Task`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
