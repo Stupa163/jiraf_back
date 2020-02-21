@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const indexRouter = require('./routes/index');
 const HttpManager = require('./manager/HttpManager');
+const registerController = require('./routes/register');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/register', registerController);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
