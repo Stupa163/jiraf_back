@@ -35,5 +35,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Task',
   });
 
+  Task.associate = (models) => {
+    Task.belongsTo(models.Sprint, {foreignKey: 'id'});
+  };
+
   return Task;
 };

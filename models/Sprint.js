@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sprint.associate = (models) => {
-    Sprint.hasOne(models.Project, { foreignKey: 'id' });
+    Sprint.belongsTo(models.Project, { foreignKey: 'id' });
     Sprint.hasMany(models.Task, { foreignKey: 'sprint' });
   };
 

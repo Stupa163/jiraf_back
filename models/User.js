@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasOne(models.Company, { foreignKey: 'id' });
+    User.belongsTo(models.Company, { foreignKey: 'id' });
     User.hasMany(models.Project, { foreignKey: 'user' });
   };
 

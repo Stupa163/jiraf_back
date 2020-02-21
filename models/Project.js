@@ -60,8 +60,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Project.associate = (models) => {
-    Project.hasOne(models.User, { foreignKey: 'id' });
-    Project.hasOne(models.Client, { foreignKey: 'id' });
+    Project.belongsTo(models.User, { foreignKey: 'id' });
+    Project.belongsTo(models.Client, { foreignKey: 'id' });
     Project.hasMany(models.Sprint, { foreignKey: 'project' });
   };
 
