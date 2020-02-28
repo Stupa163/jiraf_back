@@ -1,4 +1,5 @@
 /* jshint indent: 2 */
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -54,6 +55,10 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.belongsTo(models.Company, { foreignKey: 'id' });
     User.hasMany(models.Project, { foreignKey: 'user' });
+  };
+
+  User.prototype.isPasswordValid = function(pwd) {
+    return bcrypt.compare(pwd, this.password);
   };
 
   return User;
