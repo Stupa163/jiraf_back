@@ -5,6 +5,7 @@ const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
 
 const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
 const registerController = require('./routes/register');
 const projectRouter = require('./routes/project');
 const sprintRouter = require('./routes/sprint');
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/register', registerController);
 
 app.use('/project', projectRouter);
