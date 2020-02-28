@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
 
+const {allowConnectedUsersOnly} = require('./middleware/AuthorizationMiddleware');
+
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerController = require('./routes/register');
@@ -21,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerController);
+
+app.use(allowConnectedUsersOnly());
 
 app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);
