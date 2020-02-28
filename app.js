@@ -5,6 +5,7 @@ const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
 
 const {allowConnectedUsersOnly} = require('./middleware/AuthorizationMiddleware');
+const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
@@ -20,6 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(BruteForceMiddleware.permit());
+
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerController);
@@ -30,7 +33,6 @@ app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);
 app.use('/task', taskRouter);
 
-// catch 404 and forward to error handler
 app.use((req, res) => {
   HttpManager.renderError(res, new RouteNotFoundError(), 404);
 });
