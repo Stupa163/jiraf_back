@@ -7,12 +7,13 @@ const HttpManager = require('./manager/HttpManager');
 const { allowConnectedUsersOnly } = require('./middleware/AuthorizationMiddleware');
 const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
-const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const registerController = require('./routes/register');
+
 const projectRouter = require('./routes/project');
 const sprintRouter = require('./routes/sprint');
 const taskRouter = require('./routes/task');
+const clientRouter = require('./routes/client');
 
 const app = express();
 
@@ -23,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(BruteForceMiddleware.permit());
 
-app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerController);
 
@@ -32,6 +32,7 @@ app.use(allowConnectedUsersOnly());
 app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);
 app.use('/task', taskRouter);
+app.use('/client', clientRouter);
 
 app.use((req, res) => {
   HttpManager.renderError(res, new RouteNotFoundError(), 404);
