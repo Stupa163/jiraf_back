@@ -1,4 +1,6 @@
 /* jshint indent: 2 */
+const Models = require('../models');
+const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
@@ -32,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Sprint',
         key: 'id',
       },
+      validate: {
+        onForeignConstraintError(field, message) {
+          message(`Unable to find the sprint n°${field}`);
+        }
+      }
     },
   }, {
     tableName: 'Task',

@@ -48,6 +48,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Client',
         key: 'id',
       },
+      validate: {
+        onForeignConstraintError(field, message) {
+          message(`Unable to find the client n°${field}`);
+        }
+      }
     },
     user: {
       type: DataTypes.INTEGER(11),
@@ -56,6 +61,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'User',
         key: 'id',
       },
+      validate: {
+        onForeignConstraintError(field, message) {
+          message(`Unable to find the user n°${field}`);
+        }
+      }
     },
   }, {
     tableName: 'Project',

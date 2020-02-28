@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Company',
         key: 'id',
       },
+      validate: {
+        onForeignConstraintError(field, message) {
+          message(`Unable to find the company n°${field}`);
+        }
+      }
     },
   }, {
     tableName: 'User',

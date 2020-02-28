@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Project',
         key: 'id',
       },
+      validate: {
+        onForeignConstraintError(field, message) {
+          message(`Unable to find the project n°${field}`);
+        }
+      }
     },
   }, {
     tableName: 'Sprint',
