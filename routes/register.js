@@ -27,7 +27,6 @@ router.post('/', async (req, res) => {
   } catch (e) {
     HttpManager.renderError(res, e, e.code || 400);
   }
-  res.json({ status: 'ok' });
 });
 
 module.exports = router;

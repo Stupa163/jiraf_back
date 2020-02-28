@@ -3,7 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
-
+const cors = require('cors');
 const { allowConnectedUsersOnly } = require('./middleware/AuthorizationMiddleware');
 const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
@@ -23,6 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(BruteForceMiddleware.permit());
+
+app.use(cors());
 
 app.use('/login', loginRouter);
 app.use('/register', registerController);
