@@ -1,6 +1,6 @@
 class UnauthorizedAccessError extends Error {
   constructor() {
-    super('access_forbiden');
+    super('Access forbiden');
   }
 }
 

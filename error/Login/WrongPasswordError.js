@@ -1,6 +1,6 @@
 class WrongPasswordError extends Error {
   constructor() {
-    super('You typed a wrong password. Please try again.');
+    super('You entered a wrong password. Please try again.');
   }
 }
 

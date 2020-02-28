@@ -1,6 +1,6 @@
 class ModelNotFoundError extends Error {
   constructor(modelName) {
-    super(`${modelName}_not_found`);
+    super(`The ${modelName} could not be found`);
   }
 }
 

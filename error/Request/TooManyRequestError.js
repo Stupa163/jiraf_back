@@ -1,6 +1,6 @@
 class TooManyRequestError extends Error {
   constructor() {
-    super('too_many_request');
+    super('Too many request');
   }
 }
 

@@ -1,6 +1,6 @@
 class MissingFieldError extends Error {
   constructor(field) {
-    super(`missing_field_${field}`);
+    super(`Missing field ${field}`);
   }
 }
 
