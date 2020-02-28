@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 router.post('/', async (req, res) => {
   const { body } = req;
   try {
-    HttpManager.hasRequiredFields(body, 'firstName', 'lastName', 'plainPassword', 'phone', 'profile', 'companyName', 'companySiret', 'companyStatus');
+    HttpManager.hasRequiredFields(body, 'firstName', 'lastName', 'mail', 'plainPassword', 'phone', 'profile', 'companyName', 'companySiret', 'companyStatus');
     const company = RegisterManager.createCompany(body.companyName, body.companySiret, body.companyStatus);
     const savedCompany = await company.save();
 
