@@ -6,6 +6,16 @@ const HttpManager = require('../manager/HttpManager');
 const Models = require('../models');
 const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
+router.get('/', async (req, res) => {
+  try {
+    let projects = await Models.Project.findAll({where: {user: req.userId}});
+    HttpManager.renderSuccess(res, {projects});
+  } catch (e) {
+    HttpManager.renderError(res, e, e.code || 400)
+  }
+
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const project = await Models.Project.findByPk(req.params.id);
