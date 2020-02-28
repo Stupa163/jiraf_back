@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
 
-const {allowConnectedUsersOnly} = require('./middleware/AuthorizationMiddleware');
+const { allowConnectedUsersOnly } = require('./middleware/AuthorizationMiddleware');
 const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
 const indexRouter = require('./routes/index');

@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Project, { foreignKey: 'user' });
   };
 
-  User.prototype.isPasswordValid = function(pwd) {
+  User.prototype.isPasswordValid = function (pwd) {
     return bcrypt.compare(pwd, this.password);
   };
 

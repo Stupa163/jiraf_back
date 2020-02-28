@@ -15,19 +15,19 @@ router.post('/', async (req, res) => {
       .scope('passwordIncluded')
       .findOne({
         where: {
-          mail: body.mail
-        }
+          mail: body.mail,
+        },
       });
     if (user !== null) {
       if (await user.isPasswordValid(body.plainPassword)) {
         const token = jwt.sign(
           {
-            userId: user.id
+            userId: user.id,
           },
           process.env.RANDOM_TOKEN_SECRET,
           {
-            expiresIn: process.env.TOKEN_EXPIRATION_DELAY
-          }
+            expiresIn: process.env.TOKEN_EXPIRATION_DELAY,
+          },
         );
         // To not return the password even tho it is hashed
         user.password = undefined;

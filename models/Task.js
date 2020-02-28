@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      isImmutable: true
+      isImmutable: true,
     },
     title: {
       type: DataTypes.STRING(255),
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Task.associate = (models) => {
-    Task.belongsTo(models.Sprint, {foreignKey: 'id'});
+    Task.belongsTo(models.Sprint, { foreignKey: 'id' });
   };
 
   return Task;
