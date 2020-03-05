@@ -32,11 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Project',
         key: 'id',
       },
-      validate: {
-        onForeignConstraintError(field, message) {
-          message(`Unable to find the project n°${field}`);
-        }
-      }
     },
   }, {
     tableName: 'Sprint',
@@ -44,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sprint.associate = (models) => {
-    Sprint.belongsTo(models.Project, { foreignKey: 'id' });
+    Sprint.belongsTo(models.Project, { foreignKey: 'project' });
     Sprint.hasMany(models.Task, { foreignKey: 'sprint' });
   };
 

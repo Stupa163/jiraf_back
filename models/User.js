@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   User.addScope('passwordIncluded', {});
 
   User.associate = (models) => {
-    User.belongsTo(models.Company, { foreignKey: 'id' });
+    User.belongsTo(models.Company, { foreignKey: 'company' });
     User.hasMany(models.Project, { foreignKey: 'user' });
   };
 

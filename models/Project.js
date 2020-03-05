@@ -44,28 +44,20 @@ module.exports = (sequelize, DataTypes) => {
     client: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
+      isImmutable: true,
       references: {
         model: 'Client',
         key: 'id',
       },
-      validate: {
-        onForeignConstraintError(field, message) {
-          message(`Unable to find the client n°${field}`);
-        }
-      }
     },
     user: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
+      isImmutable: true,
       references: {
         model: 'User',
         key: 'id',
       },
-      validate: {
-        onForeignConstraintError(field, message) {
-          message(`Unable to find the user n°${field}`);
-        }
-      }
     },
   }, {
     tableName: 'Project',
@@ -73,8 +65,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Project.associate = (models) => {
-    Project.belongsTo(models.User, { foreignKey: 'id' });
-    Project.belongsTo(models.Client, { foreignKey: 'id' });
+    Project.belongsTo(models.User, { foreignKey: 'user' });
+    Project.belongsTo(models.Client, { foreignKey: 'client' });
     Project.hasMany(models.Sprint, { foreignKey: 'project' });
   };
 
