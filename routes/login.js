@@ -1,16 +1,16 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { renderError, renderSuccess, hasRequiredFields } = require('../../managers/HttpManager');
-const WrongPasswordError = require('../../error/Login/WrongPasswordError');
+const { renderError, renderSuccess, hasRequiredFields } = require('../manager/HttpManager');
+const WrongPasswordError = require('../error/Login/WrongPasswordError');
 const WrongEmailError = require('../error/Login/WrongEmailError');
 
 const router = express.Router();
-const Models = require('../../models');
+const Models = require('../models');
 
 router.post('/', async (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
   try {
-    hasRequiredFields(body, 'pseudo', 'plainPassword');
+    hasRequiredFields(body, 'mail', 'plainPassword');
     const user = await Models.User
       .scope('passwordIncluded')
       .findOne({
@@ -42,3 +42,5 @@ router.post('/', async (req, res) => {
     renderError(res, e, e.code || 400);
   }
 });
+
+module.exports = router;
