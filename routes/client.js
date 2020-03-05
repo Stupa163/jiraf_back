@@ -8,7 +8,7 @@ const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
 router.get('/:id', async (req, res) => {
     try {
-        const client = await Models.Task.findByPk(req.params.id);
+        const client = await Models.Client.findByPk(req.params.id);
         if (client !== null) {
             HttpManager.renderSuccess(res, { client });
         } else {
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const client = await instanciateModelFromRequest(Models.Task, req.body);
+        const client = await instanciateModelFromRequest(Models.Client, req.body);
         const savedClient = await client.save();
         HttpManager.renderSuccess(res, { client: savedClient }, 201);
     } catch (e) {
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     try {
-        const client = await Models.Task.findByPk(req.params.id);
+        const client = await Models.Client.findByPk(req.params.id);
         if (client !== null) {
             const updatedClient = await updateModelFromRequest(client, req.body);
             const savedClient = await updatedClient.save();
@@ -46,7 +46,7 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const client = await Models.Task.findByPk(req.params.id);
+        const client = await Models.Client.findByPk(req.params.id);
         if (client !== null) {
             client.destroy();
             HttpManager.renderSuccess(res, { result: 'deleted' });

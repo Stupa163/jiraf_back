@@ -6,16 +6,38 @@ const HttpManager = require('../manager/HttpManager');
 const Models = require('../models');
 const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
+router.get('/', async (req, res) => {
+  try {
+    let sprints = await Models.Sprint.findAll({
+      include: [{
+        model: Models.Project,
+        where: {user: req.userId},
+      }, {
+        model: Models.Task
+      }],
+    });
+    HttpManager.renderSuccess(res, { sprints  });
+  } catch (e) {
+    HttpManager.renderError(res, e, e.code || 400)
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
-    const sprint = await Models.Sprint.findByPk(req.params.id);
+    const sprint = await Models.Sprint.findOne({
+      where: {id: req.params.id},
+      include: [{
+        model: Models.Project,
+        where: {user: req.userId},
+      }],
+    });
     if (sprint !== null) {
       HttpManager.renderSuccess(res, { sprint });
     } else {
       HttpManager.renderError(res, new ModelNotFoundError('sprint'), 404);
     }
   } catch (e) {
-    HttpManager.renderError(req, e, e.code || 400);
+    HttpManager.renderError(res, e, e.code || 400);
   }
 });
 
