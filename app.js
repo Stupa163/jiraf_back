@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
-const { allowConnectedUsersOnly } = require('./middleware/AuthorizationMiddleware');
+const { allowConnectedUsersOnly, allowUserWhoPaidOnly } = require('./middleware/AuthorizationMiddleware');
 const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
 const loginRouter = require('./routes/login');
@@ -15,6 +15,7 @@ const sprintRouter = require('./routes/sprint');
 const taskRouter = require('./routes/task');
 const clientRouter = require('./routes/client');
 const issueRouter = require('./routes/issues');
+const paymentRouter = require('./routes/payment');
 
 const app = express();
 
@@ -33,6 +34,10 @@ app.use('/login', loginRouter);
 app.use('/register', registerController);
 
 app.use(allowConnectedUsersOnly());
+
+app.use('/payment', paymentRouter);
+
+app.use(allowUserWhoPaidOnly());
 
 app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);

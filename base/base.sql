@@ -17,14 +17,15 @@ ALTER TABLE `Company`
 
 CREATE TABLE `User`
 (
- `id`        int NOT NULL ,
- `firstName` varchar(255) NOT NULL ,
- `lastName`  varchar(255) NOT NULL ,
- `password`  varchar(255) NOT NULL ,
- `mail`      varchar(255) NOT NULL ,
- `phone`     bigint NOT NULL ,
- `profile`   enum('back', 'front', 'data_analyst', 'qa') NOT NULL ,
- `company`   int NOT NULL ,
+ `id`               int NOT NULL ,
+ `firstName`        varchar(255) NOT NULL ,
+ `lastName`         varchar(255) NOT NULL ,
+ `password`         varchar(255) NOT NULL ,
+ `mail`             varchar(255) NOT NULL ,
+ `phone`            bigint NOT NULL ,
+ `profile`          enum('back', 'front', 'data_analyst', 'qa') NOT NULL ,
+ `lastPaymentDate`  date NULL DEFAULT NULL ,
+ `company`          int NOT NULL ,
 
 PRIMARY KEY (`id`),
 KEY `fkIdx_30` (`company`),

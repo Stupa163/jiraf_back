@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
+            isImmutable: true,
         },
         firstName: {
             type: DataTypes.STRING(255),
@@ -32,6 +33,12 @@ module.exports = (sequelize, DataTypes) => {
         profile: {
             type: DataTypes.ENUM('back', 'front', 'data_analyst', 'qa'),
             allowNull: false,
+        },
+        lastPaymentDate: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            isImmutable: true,
+            defaultValue: null
         },
         company: {
             type: DataTypes.INTEGER(11),
@@ -59,6 +66,15 @@ module.exports = (sequelize, DataTypes) => {
 
     User.prototype.isPasswordValid = function isPasswordValid(pwd) {
         return bcrypt.compare(pwd, this.password);
+    };
+
+    User.prototype.hasPaid = function hasPaid() {
+        // noinspection JSIncompatibleTypesComparison
+        if (this.lastPaymentDate === null) {
+            return false;
+        }
+        let interval = new Date() - new Date(this.lastPaymentDate).getTime();
+        return Math.abs(Math.ceil(interval / (1000 * 3600 * 24))) < 365
     };
 
     return User;
