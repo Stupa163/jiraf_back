@@ -1,7 +1,7 @@
 class TooManyRequestError extends Error {
-  constructor() {
-    super('Too many request');
-  }
+    constructor() {
+        super('Too many request');
+    }
 }
 
 module.exports = TooManyRequestError;
