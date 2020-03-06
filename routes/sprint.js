@@ -62,7 +62,7 @@ router.patch('/:id', async (req, res) => {
             HttpManager.renderError(res, new ModelNotFoundError(), 404);
         }
     } catch (e) {
-        HttpManager.renderError(req, e, e.code || 400);
+        HttpManager.renderError(res, e, e.code || 400);
     }
 });
 
@@ -76,7 +76,7 @@ router.delete('/:id', async (req, res) => {
             HttpManager.renderError(res, new ModelNotFoundError('sprint'), 404);
         }
     } catch (e) {
-        HttpManager.renderError(req, e, e.code || 400);
+        HttpManager.renderError(res, e, e.code || 400);
     }
 });
 
