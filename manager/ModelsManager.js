@@ -7,7 +7,9 @@ exports.instanciateModelFromRequest = (Model, req) => new Promise((resolve) => {
             if (Object.prototype.hasOwnProperty.call(req, key)) {
                 object[key] = req[key];
             } else {
-                throw new MissingFieldError(key);
+                if (!Model.rawAttributes[key].allowNull) {
+                    throw new MissingFieldError(key);
+                }
             }
         }
     });

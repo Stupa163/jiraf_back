@@ -1,5 +1,7 @@
 /* jshint indent: 2 */
 
+const InvalidGithubRepoLinkFormatError = require('../error/Validation/InvalidGithubRepoLinkFormatError');
+
 module.exports = (sequelize, DataTypes) => {
     const Project = sequelize.define('Project', {
         id: {
@@ -40,6 +42,18 @@ module.exports = (sequelize, DataTypes) => {
         adr: {
             type: DataTypes.BIGINT,
             allowNull: false,
+        },
+        githubRepository: {
+            type: DataTypes.STRING(255),
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                validateLink: function(value) {
+                    if(value !== null && !/^https:\/\/github\.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+$/.test(value)) {
+                        throw new InvalidGithubRepoLinkFormatError();
+                    }
+                }
+            }
         },
         client: {
             type: DataTypes.INTEGER(11),

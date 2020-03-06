@@ -91,6 +91,7 @@
         stacks: String
         adr: Int
         client: String => The client's mail
+        githubRepository (optional): String
     }
 
 **PATCH** : `/project/:id`
@@ -106,6 +107,7 @@
         status: Enum('en_cours', 'realise')
         stacks: String
         adr: Int
+        githubRepository: String
     }
     
 **DELETE** : `/project/:id`
@@ -199,3 +201,21 @@
   > Return : `result: 'deleted'`
 
 
+## Issues :
+**GET** : `/issue/:projectid`
+  > Get all the issue of the given project\
+  > **NB** : The githubRepository fields of the project needs to be filled in order to create the issue\
+  > Return : `[{Issues}]`
+
+**POST** : `/issue/:projectId`
+  > Create a github issue for the given project\
+  > **NB** : The githubRepository fields of the project needs to be filled in order to create the issue\
+  > Return : `url: issue's url`
+
+    Parameters : {
+        pseudo: String => The user's github pseudo
+        password: String => The user's github password
+        title: String => The issue's title
+        body: String => The isssue's description
+        tags: String => The tags for the issue (separated by a comma ',')
+    }

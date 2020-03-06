@@ -14,6 +14,7 @@ const projectRouter = require('./routes/project');
 const sprintRouter = require('./routes/sprint');
 const taskRouter = require('./routes/task');
 const clientRouter = require('./routes/client');
+const issueRouter = require('./routes/issues');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);
 app.use('/task', taskRouter);
 app.use('/client', clientRouter);
+app.use('/issue', issueRouter);
 
 app.use((req, res) => {
     HttpManager.renderError(res, new RouteNotFoundError(), 404);
