@@ -8,27 +8,27 @@ const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
 router.get('/', async (req, res) => {
   try {
-    let sprints = await Models.Sprint.findAll({
+    const sprints = await Models.Sprint.findAll({
       include: [{
         model: Models.Project,
-        where: {user: req.userId},
+        where: { user: req.userId },
       }, {
-        model: Models.Task
+        model: Models.Task,
       }],
     });
-    HttpManager.renderSuccess(res, { sprints  });
+    HttpManager.renderSuccess(res, { sprints });
   } catch (e) {
-    HttpManager.renderError(res, e, e.code || 400)
+    HttpManager.renderError(res, e, e.code || 400);
   }
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const sprint = await Models.Sprint.findOne({
-      where: {id: req.params.id},
+      where: { id: req.params.id },
       include: [{
         model: Models.Project,
-        where: {user: req.userId},
+        where: { user: req.userId },
       }],
     });
     if (sprint !== null) {

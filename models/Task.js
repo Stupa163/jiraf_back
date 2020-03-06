@@ -1,6 +1,4 @@
 /* jshint indent: 2 */
-const Models = require('../models');
-const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {

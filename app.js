@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const RouteNotFoundError = require('./error/Request/RouteNotFoundError');
 const HttpManager = require('./manager/HttpManager');
-const cors = require('cors');
 const { allowConnectedUsersOnly } = require('./middleware/AuthorizationMiddleware');
 const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
@@ -21,11 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+
 app.disable('etag');
 
 app.use(BruteForceMiddleware.permit());
 
-app.use(cors());
 
 app.use('/login', loginRouter);
 app.use('/register', registerController);

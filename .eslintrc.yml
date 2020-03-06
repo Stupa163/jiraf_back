@@ -9,4 +9,7 @@ globals:
   SharedArrayBuffer: readonly
 parserOptions:
   ecmaVersion: 2018
-rules: {}
+rules: {
+  "max-len": ["error", 120, 2],
+  "no-async-promise-executor": "off",
+}

@@ -15,12 +15,13 @@ exports.instanciateModelFromRequest = (Model, req) => new Promise((resolve) => {
 });
 
 exports.updateModelFromRequest = (model, req) => new Promise((resolve) => {
-  Object.keys(model.rawAttributes).forEach((key) => {
-    if (!model.rawAttributes[key].isImmutable) {
+  const clonedModel = model;
+  Object.keys(clonedModel.rawAttributes).forEach((key) => {
+    if (!clonedModel.rawAttributes[key].isImmutable) {
       if (Object.prototype.hasOwnProperty.call(req, key)) {
-        model[key] = req[key];
+        clonedModel[key] = req[key];
       }
     }
   });
-  resolve(model);
+  resolve(clonedModel);
 });

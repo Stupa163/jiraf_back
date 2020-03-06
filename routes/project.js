@@ -9,20 +9,19 @@ const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
 
 router.get('/', async (req, res) => {
   try {
-    let projects = await Models.Project.findAll({
-      where: {user: req.userId},
+    const projects = await Models.Project.findAll({
+      where: { user: req.userId },
       include: [{
         model: Models.Sprint,
         include: [{
-          model: Models.Task
-        }]
-      }]
+          model: Models.Task,
+        }],
+      }],
     });
-    HttpManager.renderSuccess(res, {projects});
+    HttpManager.renderSuccess(res, { projects });
   } catch (e) {
-    HttpManager.renderError(res, e, e.code || 400)
+    HttpManager.renderError(res, e, e.code || 400);
   }
-
 });
 
 router.get('/:id', async (req, res) => {
@@ -37,8 +36,8 @@ router.get('/:id', async (req, res) => {
       include: [{
         model: Models.Sprint,
         include: [{
-          model: Models.Task
-        }]
+          model: Models.Task,
+        }],
       }],
     });
     if (project !== null) {
@@ -53,11 +52,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    let client = await Models.Client.findOne({
-      where: {mail: req.body.client}
+    const client = await Models.Client.findOne({
+      where: { mail: req.body.client },
     });
     if (client === null) {
-      HttpManager.renderError(res, new ModelNotFoundError('client'), 404)
+      HttpManager.renderError(res, new ModelNotFoundError('client'), 404);
     }
     const project = await instanciateModelFromRequest(Models.Project, req.body);
     project.user = req.userId;

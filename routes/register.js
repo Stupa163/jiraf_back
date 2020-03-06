@@ -1,19 +1,28 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const HttpManager = require('../manager/HttpManager');
 const RegisterManager = require('../manager/RegisterManager');
 
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 
 /* GET home page. */
 router.post('/', async (req, res) => {
   const { body } = req;
   try {
-    HttpManager.hasRequiredFields(body, 'firstName', 'lastName', 'mail', 'plainPassword', 'phone', 'profile', 'companyName', 'companySiret', 'companyStatus');
+    HttpManager.hasRequiredFields(body, 'firstName', 'lastName', 'mail', 'plainPassword', 'phone', 'profile');
+    HttpManager.hasRequiredFields(body, 'companyName', 'companySiret', 'companyStatus');
     const company = RegisterManager.createCompany(body.companyName, body.companySiret, body.companyStatus);
     const savedCompany = await company.save();
 
-    const user = await RegisterManager.createUser(body.firstName, body.lastName, body.plainPassword, body.mail, body.phone, body.profile, savedCompany.id);
+    const user = await RegisterManager.createUser(
+      body.firstName,
+      body.lastName,
+      body.plainPassword,
+      body.mail,
+      body.phone,
+      body.profile,
+      savedCompany.id,
+    );
     const savedUser = await user.save();
 
     const token = jwt.sign(

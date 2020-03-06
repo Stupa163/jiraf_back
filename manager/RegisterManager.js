@@ -11,19 +11,21 @@ exports.createCompany = (name, siret, status) => {
   return company;
 };
 
-exports.createUser = (firstName, lastName, plainPassword, mail, phone, profile, company) => new Promise(async (resolve, reject) => {
-  const user = new Models.User();
-  try {
-    user.password = await bcrypt.hash(plainPassword, await bcrypt.genSalt());
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.mail = mail;
-    user.phone = phone;
-    user.profile = profile;
-    user.company = company;
+exports.createUser = (firstName, lastName, plainPassword, mail, phone, profile, company) => new Promise(
+  async (resolve, reject) => {
+    const user = new Models.User();
+    try {
+      user.password = await bcrypt.hash(plainPassword, await bcrypt.genSalt());
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.mail = mail;
+      user.phone = phone;
+      user.profile = profile;
+      user.company = company;
 
-    resolve(user);
-  } catch (e) {
-    reject(e);
-  }
-});
+      resolve(user);
+    } catch (e) {
+      reject(e);
+    }
+  },
+);
