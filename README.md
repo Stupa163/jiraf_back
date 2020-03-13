@@ -27,6 +27,18 @@
     
     
 # User's routes :
+##User :
+**GET** : `/user/metrics`
+  > Return the connected user's metrics\
+  > Return : 
+
+    {
+        projectCount
+        onGoingProjectsCount
+        turnover
+        averageHourlyRate
+    }
+
 ## Clients :
 **GET** : `/client/:id`
   > Return the client with the given id\

@@ -16,6 +16,7 @@ const taskRouter = require('./routes/task');
 const clientRouter = require('./routes/client');
 const issueRouter = require('./routes/issues');
 const paymentRouter = require('./routes/payment');
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -29,7 +30,6 @@ app.disable('etag');
 
 app.use(BruteForceMiddleware.permit());
 
-
 app.use('/login', loginRouter);
 app.use('/register', registerController);
 
@@ -39,6 +39,7 @@ app.use('/payment', paymentRouter);
 
 app.use(allowUserWhoPaidOnly());
 
+app.use('/user', userRouter);
 app.use('/project', projectRouter);
 app.use('/sprint', sprintRouter);
 app.use('/task', taskRouter);
