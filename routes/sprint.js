@@ -29,6 +29,8 @@ router.get('/:id', async (req, res) => {
             include: [{
                 model: Models.Project,
                 where: { user: req.userId },
+            }, {
+                model: Models.Task
             }],
         });
         if (sprint !== null) {
