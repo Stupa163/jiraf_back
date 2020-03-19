@@ -37,7 +37,7 @@ app.use(allowConnectedUsersOnly());
 
 app.use('/payment', paymentRouter);
 
-app.use(allowUserWhoPaidOnly());
+//app.use(allowUserWhoPaidOnly());
 
 app.use('/user', userRouter);
 app.use('/project', projectRouter);
