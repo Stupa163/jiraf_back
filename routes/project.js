@@ -6,6 +6,9 @@ const { instanciateModelFromRequest, updateModelFromRequest } = require('../mana
 const HttpManager = require('../manager/HttpManager');
 const Models = require('../models');
 const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
+const MarkdownNotFoundError = require('../error/GithubAPI/MarkdownNotFoundError');
+
+const GITHUB_API_URI = 'https://api.github.com';
 
 router.get('/', async (req, res) => {
     try {
