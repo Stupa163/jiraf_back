@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.addScope('defaultScope', {
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password', 'lastPaymentDate'] },
     });
 
     User.addScope('passwordIncluded', {});

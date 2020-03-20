@@ -38,6 +38,7 @@ router.post('/', async (req, res) => {
             );
             // To not return the password even tho it is hashed
             savedUser.password = undefined;
+            savedUser.lastPaymentDate = undefined;
             HttpManager.renderSuccess(res, { company: savedCompany, user: savedUser, token });
         } else {
             HttpManager.renderError(res, new EmailAlreadyUserError());

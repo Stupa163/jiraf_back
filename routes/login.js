@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
                 );
                 // To not return the password even tho it is hashed
                 user.password = undefined;
+                user.lastPaymentDate = undefined;
                 renderSuccess(res, { user, token });
             } else {
                 renderError(res, new WrongPasswordError());
