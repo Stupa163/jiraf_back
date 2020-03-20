@@ -27,6 +27,15 @@
     
     
 # User's routes :
+
+##Payment
+**POST** : `/payment`
+  > Charge 450€ of the given credit card\
+  > This payment allow the connected user to access the rest of the app\
+  > Return : amount : The charged amount (in cent)\
+  > **NB** : Stripe token are used in a test context, the charge won't be billed for real\
+  > Plus, you can use `4242 4242 4242 4242` as card number in order to test the endpoint
+
 ##User :
 **GET** : `/user/metrics`
   > Return the connected user's metrics\
