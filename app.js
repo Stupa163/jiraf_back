@@ -9,6 +9,7 @@ const BruteForceMiddleware = require('./middleware/BruteForceMiddleware');
 
 const loginRouter = require('./routes/login');
 const registerController = require('./routes/register');
+const tokenRouter = require('./routes/token');
 
 const projectRouter = require('./routes/project');
 const sprintRouter = require('./routes/sprint');
@@ -32,6 +33,7 @@ app.disable('etag');
 
 app.use('/login', loginRouter);
 app.use('/register', registerController);
+app.use('/token', tokenRouter);
 
 app.use(allowConnectedUsersOnly());
 

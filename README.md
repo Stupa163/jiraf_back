@@ -25,6 +25,13 @@
         plainPassword: String
     }
     
+**POST** : `/token`
+  > Return a refreshed token\
+  > Return : `token`
+
+    Parameters : {
+        token: the expired token
+    }
     
 # User's routes :
 
