@@ -1,13 +1,14 @@
 const express = require('express');
-const HttpManager = require('../manager/HttpManager');
+
 const router = express.Router();
 const stripe = require('stripe')('sk_test_Ab4UZQSK9AInlKi6WdeIENgy00XNL8ofx5');
+const HttpManager = require('../manager/HttpManager');
 
 router.post('/', async (req, res) => {
     try {
         HttpManager.hasRequiredFields(req.body, 'cardNumber', 'expirationDate', 'cvc');
-        let cardDetails = req.body.expirationDate.split('/');
-        let card = await stripe.paymentMethods.create({
+        const cardDetails = req.body.expirationDate.split('/');
+        const card = await stripe.paymentMethods.create({
             type: 'card',
             card: {
                 number: req.body.cardNumber,
@@ -17,7 +18,7 @@ router.post('/', async (req, res) => {
             },
         });
 
-        let intent = await stripe.paymentIntents.create({
+        const intent = await stripe.paymentIntents.create({
             amount: 45000,
             currency: 'eur',
             payment_method_types: ['card'],
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
             payment_method: card.id,
         });
 
-        HttpManager.renderSuccess(res, {amount: intent.amount});
+        HttpManager.renderSuccess(res, { amount: intent.amount });
     } catch (e) {
         HttpManager.renderError(res, e, 400);
     }

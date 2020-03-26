@@ -29,7 +29,7 @@ app.use(cors());
 
 app.disable('etag');
 
-//app.use(BruteForceMiddleware.permit());
+// app.use(BruteForceMiddleware.permit());
 
 app.use('/login', loginRouter);
 app.use('/register', registerController);
@@ -39,7 +39,7 @@ app.use(allowConnectedUsersOnly());
 
 app.use('/payment', paymentRouter);
 
-//app.use(allowUserWhoPaidOnly());
+// app.use(allowUserWhoPaidOnly());
 
 app.use('/user', userRouter);
 app.use('/project', projectRouter);

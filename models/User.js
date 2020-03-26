@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATEONLY,
             allowNull: true,
             isImmutable: true,
-            defaultValue: null
+            defaultValue: null,
         },
         company: {
             type: DataTypes.INTEGER(11),
@@ -73,8 +73,8 @@ module.exports = (sequelize, DataTypes) => {
         if (this.lastPaymentDate === null) {
             return false;
         }
-        let interval = new Date() - new Date(this.lastPaymentDate).getTime();
-        return Math.abs(Math.ceil(interval / (1000 * 3600 * 24))) < 365
+        const interval = new Date() - new Date(this.lastPaymentDate).getTime();
+        return Math.abs(Math.ceil(interval / (1000 * 3600 * 24))) < 365;
     };
 
     return User;

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const HttpManager = require('../manager/HttpManager');
 const RegisterManager = require('../manager/RegisterManager');
 const Models = require('../models');
+
 const router = express.Router();
 const EmailAlreadyUserError = require('../error/Registration/EmailAlreadyUserError');
 
@@ -12,8 +13,8 @@ router.post('/', async (req, res) => {
     try {
         HttpManager.hasRequiredFields(body, 'firstName', 'lastName', 'mail', 'plainPassword', 'phone', 'profile');
         HttpManager.hasRequiredFields(body, 'companyName', 'companySiret', 'companyStatus');
-        let currentUser = await Models.User.findOne({
-            where: {mail: body.mail}
+        const currentUser = await Models.User.findOne({
+            where: { mail: body.mail },
         });
 
         if (currentUser === null) {

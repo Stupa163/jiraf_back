@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { renderError } = require('../manager/HttpManager');
 const UnauthorizedAccessError = require('../error/Request/UnauthorizedAccessError');
-const UnpaidAccountError= require('../error/Request/UnpaidAccountError');
+const UnpaidAccountError = require('../error/Request/UnpaidAccountError');
 const Models = require('../models');
 
 exports.allowConnectedUsersOnly = () => async (req, res, next) => {
@@ -29,7 +29,7 @@ exports.allowUserWhoPaidOnly = () => async (req, res, next) => {
     try {
         const user = await Models.User.findByPk(req.userId);
         if (user.hasPaid()) {
-            next()
+            next();
         } else {
             renderError(res, new UnpaidAccountError(), 402);
         }

@@ -6,10 +6,8 @@ exports.instanciateModelFromRequest = (Model, req) => new Promise((resolve) => {
         if (!Model.rawAttributes[key].isImmutable) {
             if (Object.prototype.hasOwnProperty.call(req, key)) {
                 object[key] = req[key];
-            } else {
-                if (!Model.rawAttributes[key].allowNull) {
-                    throw new MissingFieldError(key);
-                }
+            } else if (!Model.rawAttributes[key].allowNull) {
+                throw new MissingFieldError(key);
             }
         }
     });

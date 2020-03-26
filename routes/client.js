@@ -9,8 +9,8 @@ const EmailAlreadyUserError = require('../error/Registration/EmailAlreadyUserErr
 
 router.get('/all', async (req, res) => {
     try {
-        let clients = await Models.Client.findAll();
-        HttpManager.renderSuccess(res, {clients});
+        const clients = await Models.Client.findAll();
+        HttpManager.renderSuccess(res, { clients });
     } catch (e) {
         HttpManager.renderError(res, e, e.code || 400);
     }
@@ -33,8 +33,8 @@ router.post('/', async (req, res) => {
     try {
         const client = await instanciateModelFromRequest(Models.Client, req.body);
 
-        let currentClient = await Models.Client.findOne({
-            where: {mail: req.body.mail}
+        const currentClient = await Models.Client.findOne({
+            where: { mail: req.body.mail },
         });
 
         if (currentClient === null) {

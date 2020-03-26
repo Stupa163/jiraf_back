@@ -1,7 +1,5 @@
-exports.buildBodyRequest = (title, body, labels) => {
-    return {
-        "title": title,
-        "body": body,
-        "labels": labels.split(',')
-    };
-};
+exports.buildBodyRequest = (title, body, labels) => ({
+    title,
+    body,
+    labels: labels.split(','),
+});

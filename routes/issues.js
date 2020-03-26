@@ -1,12 +1,13 @@
 const express = require('express');
 const op = require('sequelize').Op;
-const HttpManager = require('../manager/HttpManager');
+
 const router = express.Router();
 const axios = require('axios');
 const Models = require('../models');
 const NullRepositoryFieldError = require('../error/GithubAPI/NullRepositoryFieldError');
 const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
-const {buildBodyRequest} = require('../manager/GithubAPIManager');
+const { buildBodyRequest } = require('../manager/GithubAPIManager');
+const HttpManager = require('../manager/HttpManager');
 
 const GITHUB_API_URI = 'https://api.github.com';
 
@@ -15,8 +16,8 @@ router.get('/:project', async (req, res) => {
         const project = await Models.Project.findOne({
             where: {
                 [op.and]: [
-                    {user: req.userId},
-                    {id: req.params.project},
+                    { user: req.userId },
+                    { id: req.params.project },
                 ],
             },
         });
@@ -31,11 +32,11 @@ router.get('/:project', async (req, res) => {
                     {
                         auth: {
                             username: body.pseudo,
-                            password: body.password
-                        }
-                    }
+                            password: body.password,
+                        },
+                    },
                 ).then((response) => {
-                    HttpManager.renderSuccess(res, {issues: response.data}, 200);
+                    HttpManager.renderSuccess(res, { issues: response.data }, 200);
                 }).catch((error) => {
                     HttpManager.renderError(res, error.response.data, error.response.status);
                 });
@@ -45,7 +46,6 @@ router.get('/:project', async (req, res) => {
         } else {
             HttpManager.renderError(res, new ModelNotFoundError('project'), 404);
         }
-
     } catch (e) {
         HttpManager.renderError(res, e, e.code || 400);
     }
@@ -56,8 +56,8 @@ router.post('/:project', async (req, res) => {
         const project = await Models.Project.findOne({
             where: {
                 [op.and]: [
-                    {user: req.userId},
-                    {id: req.params.project},
+                    { user: req.userId },
+                    { id: req.params.project },
                 ],
             },
         });
@@ -74,11 +74,11 @@ router.post('/:project', async (req, res) => {
                     {
                         auth: {
                             username: body.pseudo,
-                            password: body.password
-                        }
-                    }
+                            password: body.password,
+                        },
+                    },
                 ).then((response) => {
-                    HttpManager.renderSuccess(res, {url: response.data.url}, 201);
+                    HttpManager.renderSuccess(res, { url: response.data.url }, 201);
                 }).catch((error) => {
                     HttpManager.renderError(res, error.response.data, error.response.status);
                 });
@@ -88,7 +88,6 @@ router.post('/:project', async (req, res) => {
         } else {
             HttpManager.renderError(res, new ModelNotFoundError('project'), 404);
         }
-
     } catch (e) {
         HttpManager.renderError(res, e, e.code || 400);
     }

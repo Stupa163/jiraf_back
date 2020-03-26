@@ -18,10 +18,9 @@ router.post('/', async (req, res) => {
             },
         );
 
-        HttpManager.renderSuccess(res, {token});
-
+        HttpManager.renderSuccess(res, { token });
     } catch (e) {
-        HttpManager.renderError(res, e, e.code || 400)
+        HttpManager.renderError(res, e, e.code || 400);
     }
 });
 

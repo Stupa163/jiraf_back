@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
                 model: Models.Project,
                 where: { user: req.userId },
             }, {
-                model: Models.Task
+                model: Models.Task,
             }],
         });
         if (sprint !== null) {

@@ -1,11 +1,11 @@
-const Models = require('../models');
 const op = require('sequelize').Op;
 const sequelize = require('sequelize');
+const Models = require('../models');
 
 exports.countProject = (userId) => new Promise((async (resolve, reject) => {
     try {
         resolve(await Models.Project.count({
-            where: {user: userId}
+            where: { user: userId },
         }));
     } catch (e) {
         reject(e);
@@ -20,7 +20,7 @@ exports.countOnGoingProject = (userId) => new Promise((async (resolve, reject) =
                     { user: userId },
                     { status: 'en_cours' },
                 ],
-            }
+            },
         }));
     } catch (e) {
         reject(e);
