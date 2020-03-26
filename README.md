@@ -60,6 +60,12 @@
   > Return the client with the given id\
   > Return : `{Client}`
 
+
+**GET** : `/client/all`
+  > Return all the clients\
+  > Return `[{Client}]`
+
+
 **POST** : `/client`
   > Create a client\
   > Return : `{Client}`

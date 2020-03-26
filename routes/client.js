@@ -5,6 +5,16 @@ const { instanciateModelFromRequest, updateModelFromRequest } = require('../mana
 const HttpManager = require('../manager/HttpManager');
 const Models = require('../models');
 const ModelNotFoundError = require('../error/Sequelize/ModelNotFoundError');
+const EmailAlreadyUserError = require('../error/Registration/EmailAlreadyUserError');
+
+router.get('/all', async (req, res) => {
+    try {
+        let clients = await Models.Client.findAll();
+        HttpManager.renderSuccess(res, {clients});
+    } catch (e) {
+        HttpManager.renderError(res, e, e.code || 400);
+    }
+});
 
 router.get('/:id', async (req, res) => {
     try {
@@ -22,8 +32,17 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const client = await instanciateModelFromRequest(Models.Client, req.body);
-        const savedClient = await client.save();
-        HttpManager.renderSuccess(res, { client: savedClient }, 201);
+
+        let currentClient = await Models.Client.findOne({
+            where: {mail: req.body.mail}
+        });
+
+        if (currentClient === null) {
+            const savedClient = await client.save();
+            HttpManager.renderSuccess(res, { client: savedClient }, 201);
+        } else {
+            HttpManager.renderError(res, new EmailAlreadyUserError());
+        }
     } catch (e) {
         HttpManager.renderError(res, e, e.code || 400);
     }
