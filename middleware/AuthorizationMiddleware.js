@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { renderError } = require('../manager/HttpManager');
-const UnauthorizedAccessError = require('../error/Request/UnauthorizedAccessError');
+const NoTokenProvidedError = require('../error/Request/NoTokenProvidedError');
 const UnpaidAccountError = require('../error/Request/UnpaidAccountError');
 const Models = require('../models');
 
@@ -9,13 +9,13 @@ exports.allowConnectedUsersOnly = () => async (req, res, next) => {
         const token = req.headers.authorization;
         if (token === undefined) {
             // noinspection ExceptionCaughtLocallyJS
-            throw new UnauthorizedAccessError();
+            throw new NoTokenProvidedError();
         }
         const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET);
         const { userId } = decodedToken;
         if (req.body.userId && req.body.userId !== userId) {
             // noinspection ExceptionCaughtLocallyJS
-            throw new UnauthorizedAccessError();
+            throw new NoTokenProvidedError();
         } else {
             req.userId = userId;
             next();
