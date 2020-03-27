@@ -1,5 +1,6 @@
 /* jshint indent: 2 */
 
+const moment = require('moment');
 const InvalidGithubRepoLinkFormatError = require('../error/Validation/InvalidGithubRepoLinkFormatError');
 
 module.exports = (sequelize, DataTypes) => {
@@ -26,10 +27,16 @@ module.exports = (sequelize, DataTypes) => {
         startDate: {
             type: DataTypes.DATEONLY,
             allowNull: false,
+            get() {
+                return moment(this.getDataValue('startDate')).format('DD/MM/YYYY');
+            }
         },
         endDate: {
             type: DataTypes.DATEONLY,
             allowNull: false,
+            get() {
+                return moment(this.getDataValue('endDate')).format('DD/MM/YYYY');
+            }
         },
         status: {
             type: DataTypes.ENUM('en_cours', 'realise'),
