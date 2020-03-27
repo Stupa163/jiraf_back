@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: null,
             validate: {
                 validateLink(value) {
-                    if (value !== null && !/^https:\/\/github\.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+$/.test(value)) {
+                    if (value !== null && !/^https:\/\/github\.com\/[a-zA-Z0-9-_]+\/[a-zA-Z0-9-_]+$/.test(value)) {
                         throw new InvalidGithubRepoLinkFormatError();
                     }
                 },
