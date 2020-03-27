@@ -111,6 +111,10 @@
   > **NB** : Project objects include linked Sprint\
   > **NB** : Sprints objects include linked Tasks
 
+**GET** : `/project/difference/:id`
+  > Return the sum of hour spent on the project and the gap between the estimate cost and the real cost for the given project\
+  > Return : `hoursSpent, gapCost`
+
 **POST** : `/project`
   > Create a project\
   > Return : `{Project}`

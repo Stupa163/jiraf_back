@@ -54,6 +54,42 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/difference/:id', async (req, res) => {
+    try {
+        let hoursSpent = 0;
+
+        const project = await Models.Project.findOne({
+            where: {
+                [op.and]: [
+                    { user: req.userId },
+                    { id: req.params.id },
+                ],
+            },
+            include: [{
+                model: Models.Sprint,
+                include: [{
+                    model: Models.Task,
+                }],
+            }],
+        });
+        if (project !== null) {
+            Object.values(project.Sprints).forEach((sprint) => {
+                Object.values(sprint.Tasks).forEach((task) => {
+                    hoursSpent += +task.completionTime;
+                });
+            });
+
+            let gapCost = (+project.amount - ((hoursSpent / 8) * +project.adr));
+
+            HttpManager.renderSuccess(res, {hoursSpent, gapCost});
+        } else {
+            HttpManager.renderError(res, new ModelNotFoundError('project'), 404);
+        }
+    }   catch (e) {
+        HttpManager.renderError(res, e, e.code || 400);
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const client = await Models.Client.findOne({
