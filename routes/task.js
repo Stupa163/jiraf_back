@@ -74,7 +74,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const task = await Models.Task.findByPk(req.params.id);
         if (task !== null) {
-            task.destroy();
+            await task.destroy();
             HttpManager.renderSuccess(res, { result: 'deleted' });
         } else {
             HttpManager.renderError(res, new ModelNotFoundError('task'), 404);

@@ -175,7 +175,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const project = await Models.Project.findByPk(req.params.id);
         if (project !== null) {
-            project.destroy();
+            await project.destroy();
             HttpManager.renderSuccess(res, { result: 'deleted' });
         } else {
             HttpManager.renderError(res, new ModelNotFoundError('project'), 404);

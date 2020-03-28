@@ -93,7 +93,7 @@ CREATE TABLE `Sprint`
 
 PRIMARY KEY (`id`),
 KEY `fkIdx_71` (`project`),
-CONSTRAINT `FK_71` FOREIGN KEY `fkIdx_71` (`project`) REFERENCES `Project` (`id`)
+CONSTRAINT `FK_71` FOREIGN KEY `fkIdx_71` (`project`) REFERENCES `Project` (`id`) ON DELETE CASCADE
 );
 
 ALTER TABLE `Sprint`
@@ -112,7 +112,7 @@ CREATE TABLE `Task`
 
 PRIMARY KEY (`id`),
 KEY `fkIdx_81` (`sprint`),
-CONSTRAINT `FK_81` FOREIGN KEY `fkIdx_81` (`sprint`) REFERENCES `Sprint` (`id`)
+CONSTRAINT `FK_81` FOREIGN KEY `fkIdx_81` (`sprint`) REFERENCES `Sprint` (`id`) ON DELETE CASCADE
 );
 
 ALTER TABLE `Task`

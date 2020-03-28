@@ -72,7 +72,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const sprint = await Models.Sprint.findByPk(req.params.id);
         if (sprint !== null) {
-            sprint.destroy();
+            await sprint.destroy();
             HttpManager.renderSuccess(res, { result: 'deleted' });
         } else {
             HttpManager.renderError(res, new ModelNotFoundError('sprint'), 404);
