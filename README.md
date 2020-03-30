@@ -132,6 +132,17 @@
         githubRepository (optional): String
     }
 
+**POST** : `/project/createFromRepository`
+  > Create a project from the given github repository if this one has a correct markdown\
+  > Return `{Project}`
+
+    Parameters : {
+        pseudo: String => The user's github pseudo
+        password: String => The user's github password
+        repoName: The name of the github repository
+    }
+
+
 **PATCH** : `/project/:id`
   > Amend a project\
   > Return : `{Project}`
