@@ -1,5 +1,6 @@
 /* jshint indent: 2 */
 const bcrypt = require('bcrypt');
+const BadPhoneFormatError = require('../error/Registration/BadPhoneFormatError');
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -27,8 +28,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         phone: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.STRING(255),
             allowNull: false,
+            validate: {
+                validatePhone(value) {
+                    if (!/^\+[0-9]+/.test(value)) {
+                        throw new BadPhoneFormatError();
+                    }
+                },
+            },
         },
         profile: {
             type: DataTypes.ENUM('back', 'front', 'data_analyst', 'qa'),

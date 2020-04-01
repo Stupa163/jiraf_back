@@ -22,7 +22,7 @@ CREATE TABLE `User`
  `lastName`         varchar(255) NOT NULL ,
  `password`         varchar(255) NOT NULL ,
  `mail`             varchar(255) NOT NULL ,
- `phone`            bigint NOT NULL ,
+ `phone`            varchar(255) NOT NULL ,
  `profile`          enum('back', 'front', 'data_analyst', 'qa') NOT NULL ,
  `lastPaymentDate`  date NULL DEFAULT NULL ,
  `company`          int NOT NULL ,
@@ -44,7 +44,7 @@ CREATE TABLE `Client`
  `address`          varchar(400) NOT NULL ,
  `contactFirstName` varchar(255) NOT NULL ,
  `contactLastName`  varchar(255) NOT NULL ,
- `phone`            bigint NOT NULL ,
+ `phone`            varchar(255) NOT NULL ,
  `mail`             varchar(255) NOT NULL ,
 
 PRIMARY KEY (`id`)

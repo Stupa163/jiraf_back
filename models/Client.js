@@ -1,5 +1,7 @@
 /* jshint indent: 2 */
 
+const BadPhoneFormatError = require('../error/Registration/BadPhoneFormatError');
+
 module.exports = (sequelize, DataTypes) => {
     const Client = sequelize.define('Client', {
         id: {
@@ -26,8 +28,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         phone: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.STRING(255),
             allowNull: false,
+            validatePhone(value) {
+                if (!/^\+[0-9]+/.test(value)) {
+                    throw new BadPhoneFormatError();
+                }
+            },
         },
         mail: {
             type: DataTypes.STRING(255),
