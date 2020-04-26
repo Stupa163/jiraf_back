@@ -3,6 +3,7 @@ const MissingFieldError = require('../error/Request/MissingFieldError');
 const UNKNOW_ERROR = 'unknow_error';
 
 exports.renderError = (res, error, code = 400) => {
+    console.error(error);
     res.status(code).json({ status: 'error', error: error.message || UNKNOW_ERROR });
 };
 
